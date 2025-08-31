@@ -11,9 +11,10 @@ const tokenSlice = createSlice({
         clearToken:() => initialState,
     },
     extraReducers: builder => {
-        builder.addCase(registerUser.fulfilled,(_state, action) => action.payload.token)
-    builder.addCase(fetchUser.fulfilled,(_state, action) => action.payload.token)
-        builder.addCase(changePassword.fulfilled,(_state, action) => action.payload)
+        builder
+            .addCase(registerUser.fulfilled,(_state, action) => action.payload.token)
+            .addCase(fetchUser.fulfilled,(_state, action) => action.payload.token)
+            .addCase(changePassword.fulfilled,(_state, action) => action.payload)
     }
 })
 

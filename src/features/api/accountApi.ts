@@ -11,7 +11,7 @@ export const registerUser = createAsyncThunk(
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({user}),
+            body: JSON.stringify(user),
         });
         if (response.status === 409){
             throw new Error(`User ${user.login} already exists`);
@@ -33,7 +33,6 @@ export const fetchUser = createAsyncThunk(
             headers: {
                 Authorization: token,
             },
-
         });
         if (response.status === 401){
             throw new Error(`login or password is incorrect`);
@@ -68,13 +67,13 @@ export const updateUser = createAsyncThunk<UserData, UserData,{state: RootState}
         return{firstName, lastName};
 })
 
-export const changePassword = createAsyncThunk<string, string, {state: RootState}>(
+export const changePassword = createAsyncThunk<string, {newPassword: string, oldPassword: string}, {state: RootState}>(
     'user/password',
-    async (newPassword, {getState}) => {
+    async ({newPassword, oldPassword}, {getState}) => {
         const response = await fetch(`${base_url}/account/password`,{
             method: "PATCH",
             headers: {
-                Authorization: getState().token,
+                Authorization: createToken(getState().user.login, oldPassword),
                 'X-Password': newPassword
             }
         })

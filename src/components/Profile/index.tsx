@@ -8,8 +8,8 @@ const Profile = () => {
     const dispatch = useAppDispatch();
 
     const handleClickLogOut = () => {
-        dispatch(clearToken());
         dispatch(clearUser());
+        dispatch(clearToken());
     }
     return (
         <div>

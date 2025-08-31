@@ -12,10 +12,10 @@ const ChangePassword = ({close}: ChangePasswordProps) => {
 
     const handleClickSave = () => {
         if (newPassword === passwordConfirm) {
-            dispatch(changePassword(newPassword));
+            dispatch(changePassword({newPassword, oldPassword}));
             close();
         }else {
-            alert('Password doesn\'t match');
+            alert('Passwords do not match');
         }
     }
     const handleClickClear = () => {
@@ -31,18 +31,21 @@ const ChangePassword = ({close}: ChangePasswordProps) => {
             onChange={(e) => setOldPassword(e.target.value)}
             value={oldPassword}/>
             </label>
+
             <label>New password:
             <input
             type="password"
             onChange={(e) => setNewPassword(e.target.value)}
             value={newPassword}/>
             </label>
+
             <label>Confirm password:
                 <input
                 type= "password"
                 onChange={(e) => setPasswordConfirm(e.target.value)}
                 value={passwordConfirm}/>
             </label>
+
             <button onClick={handleClickSave}>Save and close</button>
             <button onClick={close}>Close without save</button>
             <button onClick={handleClickClear}>Clear</button>

@@ -18,9 +18,10 @@ const userSlice = createSlice({
         },
     },
     extraReducers: builder => {
-        builder.addCase(registerUser.fulfilled,(_state, action) => action.payload.user)
-        builder.addCase(fetchUser.fulfilled,(_state, action) => action.payload.user)
-        builder.addCase(updateUser.fulfilled,(state, action) => {state.firstName = action.payload.firstName; state.lastName = action.payload.lastName});
+        builder
+            .addCase(registerUser.fulfilled,(_state, action) => action.payload.user)
+            .addCase(fetchUser.fulfilled,(_state, action) => action.payload.user)
+            .addCase(updateUser.fulfilled,(state, action) => {state.firstName = action.payload.firstName; state.lastName = action.payload.lastName;})
     }
 })
 
